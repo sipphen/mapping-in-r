@@ -1,0 +1,34 @@
+---
+title: "rural.Rmd"
+author: "Henry Sippel"
+date: '2022-06-30'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidycensus)
+library(ggthemes)
+library(tigris)
+```
+
+```{r}
+rural_shifted <- get_decennial(geography = "state",
+                    variables = c("P001001", "P002005"),
+                    year = 2010,
+                    output = "wide",
+                    geometry = TRUE) |> 
+  shift_geometry()
+
+rural_shifted |> 
+  ggplot(aes(fill = (P002005/ P001001)*100)) +
+  geom_sf() +
+  scale_fill_viridis_c(option = "plasma", direction = -1) +
+  labs(title = "Rural geography of the United States",
+       fill = "Percent Rural",
+       caption = "Source: Census 2010") +
+  theme_void()
+            
+```
+
