@@ -1,0 +1,31 @@
+library(tidyverse)
+library(tidycensus)
+library(ggthemes)
+library(tigris)
+library(distill)
+
+
+
+continental <- state.name[! state.name %in% c("Alaska", "Hawaii")]  
+
+races <- get_acs(geography = "tract", 
+                 state = continental, 
+                 variables = "B02001_008", 
+                 year = 2018, 
+                 summary_var = "B02001_001", 
+                 geometry = TRUE) 
+
+races
+
+
+races_graph <- races |> 
+  mutate(Percent = (estimate/summary_est)*100) |> 
+  ggplot(mapping = aes(fill = Percent)) +
+  geom_sf(size = 0.003) +
+  scale_fill_viridis_c(direction = -1, option = "inferno") +
+  labs(title = "Percent of People Who are Two or More Races by Census Tract", 
+       caption = "Source: American Community Survey 2014-2018") +
+  theme_void()
+
+
+write_rds(races_graph, file = "races_map.rds")
