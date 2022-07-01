@@ -1,0 +1,15 @@
+---
+title: "source1.Rmd"
+author: "Henry Sippel"
+date: '2022-07-01'
+output: html_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Source 1 was the US Decennial Census Survey in 2010. This allowed us to generate maps about which states are the most rural. [@decennial2010]
+
+This was accessed by using the `tidycensus` package. [@tidycensus]

@@ -1,0 +1,22 @@
+name: mapping-in-r
+output_dir: "."
+navbar:
+  title: "Mapping Demonstration"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "County"
+      href: county.html
+    - text: "TwoRaces"
+      href: tworaces.html
+    - text: "Senior"
+      href: senior.html
+    - text: "Sources"
+      menu:
+    - text: "Decinnial Census"
+      href: source1.html
+    - text: "Decinnial Census"
+      href: source2.html
+output:
+  html_document: 
+    theme: cosmo
